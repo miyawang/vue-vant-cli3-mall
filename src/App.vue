@@ -1,21 +1,44 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
     <router-view/>
+    <div>这是最后面的</div>
+    <van-tabbar v-model="active" class="nav">
+      <!-- <van-tabbar-item info="3">
+        <span>自定义</span>
+        <img
+          slot="icon"
+          slot-scope="props"
+          :src="props.active ? icon.active : icon.normal"
+        >
+      </van-tabbar-item> -->
+      <van-tabbar-item icon="chat" to="/">首页</van-tabbar-item>
+      <van-tabbar-item icon="records" to="/category">分类</van-tabbar-item>
+      <van-tabbar-item icon="chat" to="/cart">购物车</van-tabbar-item>
+      <van-tabbar-item icon="records" to="user">我的</van-tabbar-item>
+    </van-tabbar>
   </div>
 </template>
+<script>
+import { Tabbar, TabbarItem } from 'vant';
+// Vue.use(Tabbar).use(TabbarItem);
+export default {
+   components: {
+    [Tabbar.name]: Tabbar,
+    [TabbarItem.name]: TabbarItem,
 
-<style lang="less">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+  },
+  data() {
+    return {
+      active: 0,
+      icon: {
+        normal: '//img.yzcdn.cn/icon-normal.png',
+        active: '//img.yzcdn.cn/icon-active.png'
+      }
+    }
+  }
 }
+</script>
+<style lang="less">
 #nav {
   padding: 30px;
   a {
