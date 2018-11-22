@@ -111,7 +111,7 @@ export default {
        list: [],
       loading: false,
       finished: false,
-      loadingText: '网络正在使尽洪荒之力为亲加载更多……'
+      loadingText: '正在使尽洪荒之力为亲加载更多……'
     }
   },
 
@@ -245,11 +245,19 @@ export default {
      margin-top: 0;
      margin-bottom: 3.125rem /* 50/16 */;
      padding-bottom: 5px;
-    //  background-color: #f99;
      color: @tipColor;
      font-size: .8rem /* 16/16 */;
      text-align: center;
      line-height: 1;
-  }
+  }  
 }
+.van-tabbar-item {
+    color: @fontColorH3 !important;
+    font-size: .9rem;
+    &--active {
+      color: @themeColor !important;
+    }
+}
+
+
 </style>
