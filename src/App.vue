@@ -1,7 +1,6 @@
 <template>
   <div id="app">
     <router-view/>
-    <div>这是最后面的</div>
     <van-tabbar v-model="active" class="nav">
       <!-- <van-tabbar-item info="3">
         <span>自定义</span>
@@ -13,7 +12,7 @@
       </van-tabbar-item> -->
       <van-tabbar-item icon="chat" to="/">首页</van-tabbar-item>
       <van-tabbar-item icon="records" to="/category">分类</van-tabbar-item>
-      <van-tabbar-item icon="chat" to="/cart">购物车</van-tabbar-item>
+      <van-tabbar-item icon="chat" to="/cart" info="3">购物车</van-tabbar-item>
       <van-tabbar-item icon="records" to="user">我的</van-tabbar-item>
     </van-tabbar>
   </div>

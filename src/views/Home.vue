@@ -23,7 +23,26 @@
       <h3>热门贷款</h3>
       <span>更多>></span>
     </section>
-    <ul class="pro-list">
+
+    <van-list
+        v-model="loading"
+        :finished="finished"
+        @load="onLoad"
+        :loading-text="loadingText"
+      >
+        <ul class="pro-list">
+          <li v-for="item in proList" :key="item.id">
+            <a href="">
+              <img :src="item.imageURL"/>
+              <dl>
+                <dt>{{item.title}}</dt>
+                <dd>{{item.desc}}</dd>
+              </dl>                   
+            </a>
+          </li>
+        </ul>        
+      </van-list>
+    <!-- <ul class="pro-list">
       <li v-for="item in proList" :key="item.id">
         <a href="">
           <img :src="item.imageURL"/>
@@ -33,13 +52,14 @@
           </dl>                   
         </a>
       </li>
-    </ul>
+    </ul> -->
+    <p class="bottom-line">我是有底线的</p>
   </div>
 </template>
 
 <script>
 import Vue from 'vue';
-import { Swipe, SwipeItem, Lazyload, Tabbar, TabbarItem, NoticeBar} from 'vant';
+import { Swipe, SwipeItem, Lazyload, Tabbar, TabbarItem, NoticeBar, List} from 'vant';
 // Vue.use(Swipe).use(SwipeItem);
 Vue.use(Lazyload, {});
 // Vue.use(Tabbar).use(TabbarItem);
@@ -55,6 +75,7 @@ export default {
     [SwipeItem.name]: SwipeItem,
     [Tabbar.name]: Tabbar,
     [NoticeBar.name]: NoticeBar,
+    [List.name]:List,
   },
 
   data() {
@@ -75,8 +96,22 @@ export default {
         {'desc':'1111111111111111111111111111','title':'aaaaaaa','imageURL':'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1542631960883&di=2b898862da84f7f4ca497421fcc60227&imgtype=0&src=http%3A%2F%2Fimg.tukexw.com%2Fimg%2F134ea407a06ec41f.jpg'},
         {'desc':'2222222','title':'bbbbbb','imageURL':'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1542631960883&di=2b898862da84f7f4ca497421fcc60227&imgtype=0&src=http%3A%2F%2Fimg.tukexw.com%2Fimg%2F134ea407a06ec41f.jpg'},
         {'desc':'33333333','title':'cccccccc','imageURL':'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1542631960883&di=2b898862da84f7f4ca497421fcc60227&imgtype=0&src=http%3A%2F%2Fimg.tukexw.com%2Fimg%2F134ea407a06ec41f.jpg'},
+        {'desc':'444444444','title':'dddddddd','imageURL':'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1542631960883&di=2b898862da84f7f4ca497421fcc60227&imgtype=0&src=http%3A%2F%2Fimg.tukexw.com%2Fimg%2F134ea407a06ec41f.jpg'},
+         {'desc':'1111111111111111111111111111','title':'aaaaaaa','imageURL':'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1542631960883&di=2b898862da84f7f4ca497421fcc60227&imgtype=0&src=http%3A%2F%2Fimg.tukexw.com%2Fimg%2F134ea407a06ec41f.jpg'},
+        {'desc':'2222222','title':'bbbbbb','imageURL':'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1542631960883&di=2b898862da84f7f4ca497421fcc60227&imgtype=0&src=http%3A%2F%2Fimg.tukexw.com%2Fimg%2F134ea407a06ec41f.jpg'},
+        {'desc':'33333333','title':'cccccccc','imageURL':'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1542631960883&di=2b898862da84f7f4ca497421fcc60227&imgtype=0&src=http%3A%2F%2Fimg.tukexw.com%2Fimg%2F134ea407a06ec41f.jpg'},
         {'desc':'444444444','title':'dddddddd','imageURL':'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1542631960883&di=2b898862da84f7f4ca497421fcc60227&imgtype=0&src=http%3A%2F%2Fimg.tukexw.com%2Fimg%2F134ea407a06ec41f.jpg'} 
-      ]
+      ,
+       {'desc':'1111111111111111111111111111','title':'aaaaaaa','imageURL':'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1542631960883&di=2b898862da84f7f4ca497421fcc60227&imgtype=0&src=http%3A%2F%2Fimg.tukexw.com%2Fimg%2F134ea407a06ec41f.jpg'},
+        {'desc':'2222222','title':'bbbbbb','imageURL':'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1542631960883&di=2b898862da84f7f4ca497421fcc60227&imgtype=0&src=http%3A%2F%2Fimg.tukexw.com%2Fimg%2F134ea407a06ec41f.jpg'},
+        {'desc':'33333333','title':'cccccccc','imageURL':'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1542631960883&di=2b898862da84f7f4ca497421fcc60227&imgtype=0&src=http%3A%2F%2Fimg.tukexw.com%2Fimg%2F134ea407a06ec41f.jpg'},
+        {'desc':'444444444','title':'dddddddd','imageURL':'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1542631960883&di=2b898862da84f7f4ca497421fcc60227&imgtype=0&src=http%3A%2F%2Fimg.tukexw.com%2Fimg%2F134ea407a06ec41f.jpg'} 
+      
+      ],
+       list: [],
+      loading: false,
+      finished: false,
+      loadingText: '网络正在使尽洪荒之力为亲加载更多……'
     }
   },
 
@@ -84,18 +119,42 @@ export default {
     onClickCart() {
       this.$router.push('cart');
     },
+    onLoad() {
+      // 异步更新数据
+      setTimeout(() => {
+        for (let i = 0; i < 10; i++) {
+          this.proList.push(this.proList.length + 1);
+        }
+        // 加载状态结束
+        this.loading = false;
+
+        // 数据全部加载完成
+        if (this.proList.length >= 30) {
+          this.finished = true;
+        }
+      }, 500);
+    }
 
   }
 };
 </script>
 
 <style lang="less">
+@themeColor: #f66;
+@bgColor: #f7f7f7;
+@itemBgColor: #fff;
+@fontColorH3: #333;
+@fontColorP: #666;
+@tipColor:#999;
 .index {
-  background-color: #f7f7f7;
+  background-color: @bgColor;
   .swipe {
     img {
       width: 100%;
       height: 14.375rem /* 230/16 */;
+    }
+    .van-swipe__indicator--active {
+      background-color: @themeColor;
     }
   }
   .grid , .pro-list {
@@ -106,7 +165,7 @@ export default {
     flex-wrap: wrap;
     li {
       flex-basis:49.3%;
-      background-color: #fff;
+      background-color: @itemBgColor;
       // border: 1px solid red;
       box-sizing: border-box;
       padding: 10px;
@@ -143,11 +202,11 @@ export default {
             -webkit-box-orient: vertical;
           }
           dt {
-            color: #333;
+            color: @fontColorH3;
             font-size: 20px;
           }
           dd {
-            color: #666;
+            color: @fontColorP;
             font-size: 16px;
           }
         }
@@ -157,6 +216,7 @@ export default {
   }
   .notice {
     margin-bottom: 5px;
+    color: @themeColor;
   }
   .hot {
     display: flex;
@@ -176,9 +236,20 @@ export default {
     }
   }
   .pro-list {
+   
     li {
       flex-basis:100%;
     }
+  }
+  .bottom-line {
+     margin-top: 0;
+     margin-bottom: 3.125rem /* 50/16 */;
+     padding-bottom: 5px;
+    //  background-color: #f99;
+     color: @tipColor;
+     font-size: .8rem /* 16/16 */;
+     text-align: center;
+     line-height: 1;
   }
 }
 </style>
