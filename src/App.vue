@@ -2,14 +2,6 @@
   <div id="app">
     <router-view/>
     <van-tabbar v-model="active" class="nav">
-      <!-- <van-tabbar-item info="3">
-        <span>自定义</span>
-        <img
-          slot="icon"
-          slot-scope="props"
-          :src="props.active ? icon.active : icon.normal"
-        >
-      </van-tabbar-item> -->
       <van-tabbar-item icon="chat" to="/">首页</van-tabbar-item>
       <van-tabbar-item icon="records" to="/category">分类</van-tabbar-item>
       <van-tabbar-item icon="chat" to="/cart" info="3">购物车</van-tabbar-item>
@@ -38,14 +30,9 @@ export default {
 }
 </script>
 <style lang="less">
-#nav {
-  padding: 30px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
+@import url("./assets/reset.css");
+@import url("./assets/iconfont/iconfont.css");
+
+
 </style>
+
